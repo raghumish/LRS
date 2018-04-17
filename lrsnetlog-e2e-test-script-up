@@ -1,0 +1,407 @@
+raghu@raghu-VirtualBox:~/fabric-samples/lrsnetwork$ sudo IMAGE_TAG=x86_64-1.1.0 COMPOSE_PROJECT_NAME=lrsnetwork ./lrsfn.sh -m up
+Starting with channel 'mychannel' and CLI timeout of '10' seconds and CLI delay of '3' seconds
+Continue? [Y/n] Y
+proceeding ...
+2018-04-17 17:08:27.260 UTC [main] main -> INFO 001 Exiting.....
+LOCAL_VERSION=1.1.0
+DOCKER_IMAGE_VERSION=1.1.0
+Creating network "lrsnetwork_lrsfn" with the default driver
+Creating volume "lrsnetwork_peer0.endorser.org" with default driver
+Creating volume "lrsnetwork_orderer.example.com" with default driver
+Creating volume "lrsnetwork_peer0.citizen.org" with default driver
+Creating volume "lrsnetwork_peer0.registrar.org" with default driver
+Creating volume "lrsnetwork_peer2.citizen.org" with default driver
+Creating volume "lrsnetwork_peer1.citizen.org" with default driver
+Creating volume "lrsnetwork_peer3.citizen.org" with default driver
+Creating peer0.citizen.org ... done
+Creating cli ... done
+Creating orderer.example.com ... 
+Creating peer0.endorser.org ... 
+Creating peer1.registrar.org ... 
+Creating peer1.citizen.org ... 
+Creating peer0.registrar.org ... 
+Creating peer0.citizen.org ... 
+Creating peer3.citizen.org ... 
+Creating cli ... 
+
+ ____    _____      _      ____    _____ 
+/ ___|  |_   _|    / \    |  _ \  |_   _|
+\___ \    | |     / _ \   | |_) |   | |  
+ ___) |   | |    / ___ \  |  _ <    | |  
+|____/    |_|   /_/   \_\ |_| \_\   |_|  
+
+Build your first network (BYFN) end-to-end test
+
+Channel name : mychannel
+Creating channel...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
++ peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
++ res=0
++ set +x
+2018-04-17 17:08:54.851 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:08:55.135 UTC [channelCmd] InitCmdFactory -> INFO 002 Endorser and orderer connections initialized
+2018-04-17 17:08:55.341 UTC [main] main -> INFO 003 Exiting.....
+===================== Channel "mychannel" is created successfully ===================== 
+
+Having all peers join the channel...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
++ peer channel join -b mychannel.block
++ res=0
++ set +x
+2018-04-17 17:08:55.601 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:08:55.863 UTC [channelCmd] executeJoin -> INFO 002 Successfully submitted proposal to join channel
+2018-04-17 17:08:55.863 UTC [main] main -> INFO 003 Exiting.....
+===================== peer0.org1 joined on the channel "mychannel" ===================== 
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer1.citizen.org:7051
++ peer channel join -b mychannel.block
++ res=0
++ set +x
+2018-04-17 17:08:59.450 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:08:59.856 UTC [channelCmd] executeJoin -> INFO 002 Successfully submitted proposal to join channel
+2018-04-17 17:08:59.856 UTC [main] main -> INFO 003 Exiting.....
+===================== peer1.org1 joined on the channel "mychannel" ===================== 
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=RegistrarMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.registrar.org:7051
++ peer channel join -b mychannel.block
++ res=0
++ set +x
+2018-04-17 17:09:03.278 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:03.418 UTC [channelCmd] executeJoin -> INFO 002 Successfully submitted proposal to join channel
+2018-04-17 17:09:03.418 UTC [main] main -> INFO 003 Exiting.....
+===================== peer0.org2 joined on the channel "mychannel" ===================== 
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=RegistrarMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer1.registrar.org:7051
++ peer channel join -b mychannel.block
++ res=0
++ set +x
+2018-04-17 17:09:06.642 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:06.804 UTC [channelCmd] executeJoin -> INFO 002 Successfully submitted proposal to join channel
+2018-04-17 17:09:06.804 UTC [main] main -> INFO 003 Exiting.....
+===================== peer1.org2 joined on the channel "mychannel" ===================== 
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/peers/peer0.endorser.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=EndorserMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/users/Admin@endorser.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.endorser.org:7051
++ peer channel join -b mychannel.block
++ res=0
++ set +x
+2018-04-17 17:09:10.027 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:10.273 UTC [channelCmd] executeJoin -> INFO 002 Successfully submitted proposal to join channel
+2018-04-17 17:09:10.273 UTC [main] main -> INFO 003 Exiting.....
+===================== peer0.org3 joined on the channel "mychannel" ===================== 
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer2.citizen.org:7051
++ peer channel join -b mychannel.block
++ res=0
++ set +x
+2018-04-17 17:09:13.498 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:14.021 UTC [channelCmd] executeJoin -> INFO 002 Successfully submitted proposal to join channel
+2018-04-17 17:09:14.021 UTC [main] main -> INFO 003 Exiting.....
+===================== peer2.org1 joined on the channel "mychannel" ===================== 
+
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer3.citizen.org:7051
++ peer channel join -b mychannel.block
++ res=0
++ set +x
+2018-04-17 17:09:17.516 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:17.687 UTC [channelCmd] executeJoin -> INFO 002 Successfully submitted proposal to join channel
+2018-04-17 17:09:17.687 UTC [main] main -> INFO 003 Exiting.....
+===================== peer3.org1 joined on the channel "mychannel" ===================== 
+
+Updating anchor peers for org1...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
++ peer channel update -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/CitizenMSPanchors.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
++ res=0
++ set +x
+2018-04-17 17:09:20.918 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:21.102 UTC [channelCmd] update -> INFO 002 Successfully submitted channel update
+2018-04-17 17:09:21.102 UTC [main] main -> INFO 003 Exiting.....
+===================== Anchor peers for org "CitizenMSP" on "mychannel" is updated successfully ===================== 
+
+Updating anchor peers for org2...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=RegistrarMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.registrar.org:7051
++ peer channel update -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/RegistrarMSPanchors.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
++ res=0
++ set +x
+2018-04-17 17:09:24.897 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:24.966 UTC [channelCmd] update -> INFO 002 Successfully submitted channel update
+2018-04-17 17:09:24.966 UTC [main] main -> INFO 003 Exiting.....
+===================== Anchor peers for org "RegistrarMSP" on "mychannel" is updated successfully ===================== 
+
+Updating anchor peers for org3...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/peers/peer0.endorser.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=EndorserMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/users/Admin@endorser.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.endorser.org:7051
++ peer channel update -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/EndorserMSPanchors.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
++ res=0
++ set +x
+2018-04-17 17:09:28.453 UTC [channelCmd] InitCmdFactory -> INFO 001 Endorser and orderer connections initialized
+2018-04-17 17:09:28.641 UTC [channelCmd] update -> INFO 002 Successfully submitted channel update
+2018-04-17 17:09:28.641 UTC [main] main -> INFO 003 Exiting.....
+===================== Anchor peers for org "EndorserMSP" on "mychannel" is updated successfully ===================== 
+
+Installing chaincode on peer0.org1...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
++ peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
++ res=0
++ set +x
+2018-04-17 17:09:32.828 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:09:32.828 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2018-04-17 17:09:36.661 UTC [main] main -> INFO 003 Exiting.....
+===================== Chaincode is installed on peer0.org1 ===================== 
+
+Install chaincode on peer0.org2...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=RegistrarMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.registrar.org:7051
++ peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
++ res=0
++ set +x
+2018-04-17 17:09:37.229 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:09:37.229 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2018-04-17 17:09:38.365 UTC [main] main -> INFO 003 Exiting.....
+===================== Chaincode is installed on peer0.org2 ===================== 
+
+Install chaincode on peer0.org3...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/peers/peer0.endorser.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=EndorserMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/users/Admin@endorser.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.endorser.org:7051
++ peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
++ res=0
++ set +x
+2018-04-17 17:09:38.650 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:09:38.650 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2018-04-17 17:09:40.475 UTC [main] main -> INFO 003 Exiting.....
+===================== Chaincode is installed on peer0.org3 ===================== 
+
+Instantiating chaincode on peer0.org2...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=RegistrarMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.registrar.org:7051
++ peer chaincode instantiate -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n mycc -l golang -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P 'OR ('\''CitizenMSP.peer'\'', '\''RegistrarMSP.peer'\'')'
++ res=0
++ set +x
+2018-04-17 17:09:41.126 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:09:41.127 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2018-04-17 17:12:13.871 UTC [main] main -> INFO 003 Exiting.....
+===================== Chaincode Instantiation on peer0.org2 on channel 'mychannel' is successful ===================== 
+
+Querying chaincode on peer0.org1...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
+===================== Querying on peer0.org1 on channel 'mychannel'... ===================== 
+Attempting to Query peer0.org1 ...3 secs
++ peer chaincode query -C mychannel -n mycc -c '{"Args":["query","a"]}'
++ res=0
++ set +x
+
+2018-04-17 17:12:17.880 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:12:17.880 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+Query Result: 100
+2018-04-17 17:14:39.354 UTC [main] main -> INFO 003 Exiting.....
+===================== Query on peer0.org1 on channel 'mychannel' is successful ===================== 
+Sending invoke transaction on peer0.org1...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=CitizenMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
++ peer chaincode invoke -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n mycc -c '{"Args":["invoke","a","b","10"]}'
++ res=0
++ set +x
+2018-04-17 17:14:40.560 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:14:40.560 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2018-04-17 17:14:40.839 UTC [chaincodeCmd] chaincodeInvokeOrQuery -> INFO 003 Chaincode invoke successful. result: status:200 
+2018-04-17 17:14:40.839 UTC [main] main -> INFO 004 Exiting.....
+===================== Invoke transaction on peer0.org1 on channel 'mychannel' is successful ===================== 
+
+Installing chaincode on peer1.org2...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=RegistrarMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer1.registrar.org:7051
++ peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
++ res=0
++ set +x
+2018-04-17 17:14:41.332 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:14:41.332 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+2018-04-17 17:14:43.295 UTC [main] main -> INFO 003 Exiting.....
+===================== Chaincode is installed on peer1.org2 ===================== 
+
+Querying chaincode on peer1.org2...
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.key
+CORE_PEER_LOCALMSPID=RegistrarMSP
+CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/server.crt
+CORE_PEER_TLS_ENABLED=true
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ID=cli
+CORE_LOGGING_LEVEL=INFO
+CORE_PEER_ADDRESS=peer1.registrar.org:7051
+===================== Querying on peer1.org2 on channel 'mychannel'... ===================== 
+Attempting to Query peer1.org2 ...3 secs
++ peer chaincode query -C mychannel -n mycc -c '{"Args":["query","a"]}'
++ res=0
++ set +x
+
+2018-04-17 17:14:46.925 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001 Using default escc
+2018-04-17 17:14:46.925 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
+Query Result: 90
+2018-04-17 11:47:07.388 UTC [main] main -> INFO 003 Exiting.....
+===================== Query on peer1.org2 on channel 'mychannel' is successful ===================== 
+
+========= All GOOD, BYFN execution completed =========== 
+
+
+ _____   _   _   ____   
+| ____| | \ | | |  _ \  
+|  _|   |  \| | | | | | 
+| |___  | |\  | | |_| | 
+|_____| |_| \_| |____/  
+

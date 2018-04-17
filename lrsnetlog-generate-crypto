@@ -1,0 +1,73 @@
+sudo ./lrsfn.sh -m generate
+Generating certs and genesis block for with channel 'mychannel' and CLI timeout of '10' seconds and CLI delay of '3' seconds
+Continue? [Y/n] Y
+proceeding ...
+/home/raghu/fabric-samples/lrsnetwork/../bin/cryptogen
+
+##########################################################
+##### Generate certificates using cryptogen tool #########
+##########################################################
++ cryptogen generate --config=./crypto-config.yaml
+citizen.org
+registrar.org
+endorser.org
++ res=0
++ set +x
+
+/home/raghu/fabric-samples/lrsnetwork/../bin/configtxgen
+##########################################################
+#########  Generating Orderer Genesis block ##############
+##########################################################
++ configtxgen -profile ThreeOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+2018-04-17 22:12:26.789 IST [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-04-17 22:12:27.047 IST [msp] getMspConfig -> INFO 002 Loading NodeOUs
+2018-04-17 22:12:27.057 IST [msp] getMspConfig -> INFO 003 Loading NodeOUs
+2018-04-17 22:12:27.102 IST [msp] getMspConfig -> INFO 004 Loading NodeOUs
+2018-04-17 22:12:27.121 IST [common/tools/configtxgen] doOutputBlock -> INFO 005 Generating genesis block
+2018-04-17 22:12:27.122 IST [common/tools/configtxgen] doOutputBlock -> INFO 006 Writing genesis block
++ res=0
++ set +x
+
+#################################################################
+### Generating channel configuration transaction 'channel.tx' ###
+#################################################################
++ configtxgen -profile ThreeOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID mychannel
+2018-04-17 22:12:27.294 IST [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-04-17 22:12:27.431 IST [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 002 Generating new channel configtx
+2018-04-17 22:12:27.462 IST [msp] getMspConfig -> INFO 003 Loading NodeOUs
+2018-04-17 22:12:27.479 IST [msp] getMspConfig -> INFO 004 Loading NodeOUs
+2018-04-17 22:12:27.480 IST [msp] getMspConfig -> INFO 005 Loading NodeOUs
+2018-04-17 22:12:27.608 IST [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 006 Writing new channel tx
++ res=0
++ set +x
+
+####################################################################
+#######    Generating anchor peer update for CitizenMSP   ##########
+####################################################################
++ configtxgen -profile ThreeOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/CitizenMSPanchors.tx -channelID mychannel -asOrg CitizenMSP
+2018-04-17 22:12:27.674 IST [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-04-17 22:12:27.799 IST [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
+2018-04-17 22:12:27.800 IST [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
++ res=0
++ set +x
+
+######################################################################
+#######    Generating anchor peer update for RegistrarMSP   ##########
+######################################################################
++ configtxgen -profile ThreeOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/RegistrarMSPanchors.tx -channelID mychannel -asOrg RegistrarMSP
+2018-04-17 22:12:27.869 IST [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-04-17 22:12:27.970 IST [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
+2018-04-17 22:12:27.970 IST [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
++ res=0
++ set +x
+
+######################################################################
+#######    Generating anchor peer update for EndorserMSP   ##########
+######################################################################
++ configtxgen -profile ThreeOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/EndorserMSPanchors.tx -channelID mychannel -asOrg EndorserMSP
+2018-04-17 22:12:28.067 IST [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-04-17 22:12:28.193 IST [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
+2018-04-17 22:12:28.197 IST [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
++ res=0
++ set +x
+

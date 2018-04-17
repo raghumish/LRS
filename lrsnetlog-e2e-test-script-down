@@ -1,0 +1,68 @@
+raghu@raghu-VirtualBox:~/fabric-samples/lrsnetwork$ sudo IMAGE_TAG=x86_64-1.1.0 COMPOSE_PROJECT_NAME=lrsnetwork ./lrsfn.sh -m down
+Stopping with channel 'mychannel' and CLI timeout of '10' seconds and CLI delay of '3' seconds
+Continue? [Y/n] Y
+proceeding ...
+Stopping cli                 ... done
+Stopping peer1.citizen.org   ... done
+Stopping peer0.citizen.org   ... done
+Stopping peer1.registrar.org ... done
+Stopping peer0.endorser.org  ... done
+Stopping peer0.registrar.org ... done
+Stopping peer3.citizen.org   ... done
+Stopping orderer.example.com ... done
+Stopping peer2.citizen.org   ... done
+Removing cli                 ... done
+Removing peer1.citizen.org   ... done
+Removing peer0.citizen.org   ... done
+Removing peer1.registrar.org ... done
+Removing peer0.endorser.org  ... done
+Removing peer0.registrar.org ... done
+Removing peer3.citizen.org   ... done
+Removing orderer.example.com ... done
+Removing peer2.citizen.org   ... done
+Removing network lrsnetwork_lrsfn
+Removing volume lrsnetwork_peer0.endorser.org
+Removing volume lrsnetwork_orderer.example.com
+Removing volume lrsnetwork_peer0.citizen.org
+Removing volume lrsnetwork_peer0.registrar.org
+Removing volume lrsnetwork_peer2.citizen.org
+Removing volume lrsnetwork_peer1.citizen.org
+Removing volume lrsnetwork_peer3.citizen.org
+Removing volume lrsnetwork_peer1.registrar.org
+Removing network lrsnetwork_lrsfn
+WARNING: Network lrsnetwork_lrsfn not found.
+Removing volume lrsnetwork_peer0.endorser.org
+WARNING: Volume lrsnetwork_peer0.endorser.org not found.
+Removing volume lrsnetwork_orderer.example.com
+WARNING: Volume lrsnetwork_orderer.example.com not found.
+Removing volume lrsnetwork_peer0.citizen.org
+WARNING: Volume lrsnetwork_peer0.citizen.org not found.
+Removing volume lrsnetwork_peer0.registrar.org
+WARNING: Volume lrsnetwork_peer0.registrar.org not found.
+Removing volume lrsnetwork_peer2.citizen.org
+WARNING: Volume lrsnetwork_peer2.citizen.org not found.
+Removing volume lrsnetwork_peer1.citizen.org
+WARNING: Volume lrsnetwork_peer1.citizen.org not found.
+Removing volume lrsnetwork_peer3.citizen.org
+WARNING: Volume lrsnetwork_peer3.citizen.org not found.
+Removing volume lrsnetwork_peer1.registrar.org
+WARNING: Volume lrsnetwork_peer1.registrar.org not found.
+dd09170f8da8
+3f569c87cbbc
+ad0adf8db254
+Untagged: dev-peer0.citizen.org-mycc-1.0-2884a15cc8263b7a46cf4d32d53312a0ba7057868b84d15d14d05fe4c217e5ab:latest
+Deleted: sha256:5e810d4571031258503688edde340a688a72e3d7963974ef6c52a093784ad909
+Deleted: sha256:cef01c8def5f79127bf4eb1085178582112e8830a2ddc148ce18502c2990b39e
+Deleted: sha256:370e1b07f4d9139786b37c7b9603a595efcdd0d7a459bdebf5b46df545a4dcd8
+Deleted: sha256:9228cd7f48cc6858863120d137ea0eba07f11d55d83766f18e7da7ae81ffe668
+Untagged: dev-peer0.registrar.org-mycc-1.0-42ef1554da5afed0da120c85a59bcd7bb73702e7374eae25af97207dbf4f8439:latest
+Deleted: sha256:cf8aaf5fec35fd272c28c7053830002fbe560ed4b35cc7a2278e718dc215a880
+Deleted: sha256:1abbee9bfec83244ca9cede41f3ce7164629839b618f4cd18daf765e8246d600
+Deleted: sha256:7cfa3c70b2c6154c0b26f28bc24786ecf7081e7cd47b7400680d0ce4b099acad
+Deleted: sha256:7a3cccd22f7307e57fef147c4088bd8b9283cca05eb4c7b0f842d11dfa54a429
+Untagged: dev-peer1.registrar.org-mycc-1.0-f49f8075f16ad53aa9a2dbc8eeeb393bcf2caa79794383d2c24b8ca29ec87191:latest
+Deleted: sha256:2aac9d9234067d229540729cb1f5b459a313261adbb8ddd9bed834a7768fbbff
+Deleted: sha256:3c66e50ff274c12797bc1d40ea574147e9cb8e70aeb3687fc302a0b8915f4c08
+Deleted: sha256:6fb19acc34cd8d785a7c4f8458d40bbcff6e0188b0e4540fadc41044c62a4f0f
+Deleted: sha256:9cf2856a326a5a024cb8492fa3c10c227991720c4ae2e7f37502bf47201ecb77
+
