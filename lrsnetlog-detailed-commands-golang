@@ -1,0 +1,106 @@
+
+export PATH=~/bin:$PATH
+cd ~/fabric-samples/lrsnetwork
+
+~/bin/cryptogen generate --config=./crypto-config.yaml
+export FABRIC_CFG_PATH=$PWD
+~/bin/configtxgen -profile ThreeOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+export CHANNEL_NAME=mychannel && ~/bin/configtxgen -profile ThreeOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+
+~/bin/configtxgen -profile ThreeOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg CitizenMSP
+~/bin/configtxgen -profile ThreeOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg RegistrarMSP
+~/bin/configtxgen -profile ThreeOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org3MSPanchors.tx -channelID $CHANNEL_NAME -asOrg EndorserMSP
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
+CORE_PEER_LOCALMSPID="CitizenMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+
+IMAGE_TAG=x86_64-1.1.0 COMPOSE_PROJECT_NAME=lrsnetwork docker-compose -f docker-compose-cli.yaml up -d
+docker exec -it cli bash
+
+export CHANNEL_NAME=mychannel
+peer channel create -o orderer.example.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+peer channel join -b mychannel.block
+peer channel update -o orderer.example.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/Org1MSPanchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ADDRESS=peer1.citizen.org:7051
+CORE_PEER_LOCALMSPID="CitizenMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer1.citizen.org/tls/ca.crt
+peer channel join -b mychannel.block
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ADDRESS=peer2.citizen.org:7051
+CORE_PEER_LOCALMSPID="CitizenMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer2.citizen.org/tls/ca.crt
+peer channel join -b mychannel.block
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ADDRESS=peer3.citizen.org:7051
+CORE_PEER_LOCALMSPID="CitizenMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer3.citizen.org/tls/ca.crt
+peer channel join -b mychannel.block
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ADDRESS=peer0.registrar.org:7051
+CORE_PEER_LOCALMSPID="RegistrarMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+peer channel join -b mychannel.block
+peer channel update -o orderer.example.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/Org2MSPanchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ADDRESS=peer1.registrar.org:7051
+CORE_PEER_LOCALMSPID="RegistrarMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer1.registrar.org/tls/ca.crt
+peer channel join -b mychannel.block
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/users/Admin@endorser.org/msp
+CORE_PEER_ADDRESS=peer0.endorser.org:7051
+CORE_PEER_LOCALMSPID="EndorserMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/peers/peer0.endorser.org/tls/ca.crt
+peer channel join -b mychannel.block
+peer channel update -o orderer.example.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/Org3MSPanchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
+CORE_PEER_LOCALMSPID="CitizenMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ADDRESS=peer0.registrar.org:7051
+CORE_PEER_LOCALMSPID="RegistrarMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/users/Admin@endorser.org/msp
+CORE_PEER_ADDRESS=peer0.endorser.org:7051
+CORE_PEER_LOCALMSPID="EndorserMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/endorser.org/peers/peer0.endorser.org/tls/ca.crt
+peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
+peer chaincode instantiate -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C $CHANNEL_NAME -n mycc -l golang -v 1.0 -c '{"Args":["init","a", "100", "b","200"]}' -P 'OR ('\''CitizenMSP.peer'\'', '\''RegistrarMSP.peer'\'')'
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ADDRESS=peer0.citizen.org:7051
+CORE_PEER_LOCALMSPID="CitizenMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer0.citizen.org/tls/ca.crt
+peer chaincode query -C mychannel -n mycc -c '{"Args":["query","a"]}'
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/users/Admin@registrar.org/msp
+CORE_PEER_ADDRESS=peer0.registrar.org:7051
+CORE_PEER_LOCALMSPID="RegistrarMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/registrar.org/peers/peer0.registrar.org/tls/ca.crt
+peer chaincode invoke -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n mycc -c '{"Args":["invoke","a","b","10"]}'
+
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/users/Admin@citizen.org/msp
+CORE_PEER_ADDRESS=peer1.citizen.org:7051
+CORE_PEER_LOCALMSPID="CitizenMSP"
+CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/citizen.org/peers/peer1.citizen.org/tls/ca.crt
+peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
+peer chaincode query -C mychannel -n mycc -c '{"Args":["query","a"]}'
+
+
+
+
