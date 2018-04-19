@@ -141,3 +141,7 @@ CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/c
 peer chaincode install -n mycc -v 1.0 -l golang -p github.com/chaincode/chaincode_example02/go/
 peer chaincode query -C mychannel -n mycc -c '{"Args":["query","a"]}'
 
+
+***** TO START CLI AGAIN AFTER INACTIVITY *****
+docker start cli
+docker exec -it cli bash
