@@ -145,3 +145,22 @@ peer chaincode query -C mychannel -n mycc -c '{"Args":["query","a"]}'
 ***** TO START CLI AGAIN AFTER INACTIVITY *****
 docker start cli
 docker exec -it cli bash
+
+
+***** SEE CHAINCODE LOGS FOR PEERS *****
+
+docker logs dev-peer0.endorser.org-mycc-1.0
+## ex02 Init
+## Aval = 100, Bval = 200
+
+docker logs dev-peer0.citizen.org-mycc-1.0
+## ex02 Invoke
+## Query Response:{"Name":"a","Amount":"100"}
+
+docker logs dev-peer0.registrar.org-mycc-1.0
+## ex02 Invoke
+## Aval = 90, Bval = 210
+
+docker logs dev-peer1.citizen.org-mycc-1.0
+## ex02 Invoke
+## Query Response:{"Name":"a","Amount":"90"}
